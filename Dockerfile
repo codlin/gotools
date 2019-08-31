@@ -23,5 +23,5 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.9.1/pr
 RUN apt-get update
 RUN apt-get -y install tcl tk expect
 
-RUN go get -u -v github.com/golang/protobuf/proto
-RUN go get -u -v github.com/micro/protoc-gen-micro
+RUN go get -u -v github.com/golang/protobuf/proto && go get install github.com/golang/protobuf/proto \
+    && go get -u -v github.com/micro/protoc-gen-micro && go get install github.com/micro/protoc-gen-micro
