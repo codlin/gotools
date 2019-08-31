@@ -1,4 +1,4 @@
-FROM golang:1.12.9
+FROM golang:1.12-alpine3.10
 
 USER root
 ENV GOPATH /go
