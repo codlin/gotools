@@ -13,7 +13,7 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.9.1/pr
     && cd /usr/local/protobuf-* \
     &&  ./configure && make && make install \
     && rm -rf /go/protobuf-all-3.9.1.tar.gz && rm -rf /usr/local/protobuf-* \
-    && wget https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz \
+    && cd /go && wget https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz \
     && tar zxvf docker-latest.tgz \
     && cp docker/docker /usr/local/bin/ \
     && rm -rf docker docker-latest.tgz
