@@ -19,7 +19,7 @@ RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 
 RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protoc-3.11.2-linux-x86_64.zip \
-    && tar protoc-3.11.2-linux-x86_64.zip -d ~/protoc \
+    && unzip protoc-3.11.2-linux-x86_64.zip -d ~/protoc \
     && cp -rf ~/protoc/bin/* /usr/local/bin/ && cp -rf ~/protoc/include/* /usr/local/include/ \
     && ./configure && make && make install \
     && rm -rf protoc* \
