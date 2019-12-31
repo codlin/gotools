@@ -5,8 +5,8 @@ ENV GO111MODULE=off
 
 # Install packages
 RUN apt-get update && \
-    && apt-get install -y --no-install-recommends tcl tk expect
-    && go get -u golang.org/x/lint/golint
+    && apt-get install -y --no-install-recommends tcl tk expect\
+    && go get -u golang.org/x/lint/golint \
     && go get -u github.com/golang/protobuf/protoc-gen-go \
     && go install github.com/golang/protobuf/protoc-gen-go \
     && go get -u google.golang.org/grpc \
