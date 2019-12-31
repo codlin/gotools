@@ -2,12 +2,13 @@ FROM golang:1.13.5
 
 ENV LD_LIBRARY_PATH /usr/local/lib
 ENV GO111MODULE=off
+ENV GOPROXY="https://goproxy.cn,direct"
 
 # Install packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends tcl tk expect
     
-RUN git clone https://github.com/golang/lint.git $GOPATH/src/golang.org/x/lint　\
+RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/golang/protobuf/protoc-gen-go \
     && go install github.com/golang/protobuf/protoc-gen-go \
     && go get -u google.golang.org/grpc \
