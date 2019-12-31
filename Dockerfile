@@ -18,12 +18,11 @@ RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
     && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 
-RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.tar.gz \
-    && tar -C /usr/local -zxf protobuf-all-*.tar.gz \
-    && cd /usr/local/protobuf-* \
-    &&  ./configure && make && make install \
-    && rm -rf /go/protobuf-all-*.tar.gz && rm -rf /usr/local/protobuf-* \
-    && rm -f /usr/local/lib/libproto*.a && rm -f /usr/local/lib/libproto*.la \
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protoc-3.11.2-linux-x86_64.zip \
+    && tar protoc-3.11.2-linux-x86_64.zip -d ~/protoc \
+    && cp -rf ~/protoc/bin/* /usr/local/bin/ && cp -rf ~/protoc/include/* /usr/local/include/ \
+    && ./configure && make && make install \
+    && rm -rf protoc* \
     && cd /go && wget https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz \
     && tar zxvf docker-latest.tgz \
     && cp docker/docker /usr/local/bin/ \
