@@ -1,12 +1,12 @@
-FROM golang:1.13.5
+FROM golang:1.13.5-alpine3.11
 
 ENV LD_LIBRARY_PATH /usr/local/lib
 ENV GO111MODULE=off
 ENV GOPROXY="https://goproxy.cn,direct"
 
 # Install packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends tcl tk expect unzip
+RUN apk update \
+    && apk install -y --no-install-recommends tcl tk expect unzip git
     
 RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/golang/protobuf/protoc-gen-go \
