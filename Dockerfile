@@ -4,10 +4,6 @@ ENV LD_LIBRARY_PATH /usr/local/lib
 ENV GO111MODULE=off
 ENV GOPROXY="https://goproxy.cn,direct"
 
-# Install packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends tcl tk expect unzip
-    
 RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/golang/protobuf/protoc-gen-go \
     && go install github.com/golang/protobuf/protoc-gen-go \
@@ -18,6 +14,10 @@ RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
     && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 
+# Install packages
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tcl tk expect unzip
+    
 RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protoc-3.11.2-linux-x86_64.zip \
     && unzip protoc-3.11.2-linux-x86_64.zip -d ~/protoc \
     && cp -rf ~/protoc/bin/* /usr/local/bin/ && cp -rf ~/protoc/include/* /usr/local/include/ \
