@@ -6,7 +6,7 @@ ENV GOPROXY="https://goproxy.cn,direct"
 
 # Install packages
 RUN apk update \
-    && apk add tcl tk expect unzip git protobuf
+    && apk add tcl tk expect git protobuf
     
 RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/golang/protobuf/protoc-gen-go \
@@ -18,10 +18,7 @@ RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
     && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 
-RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protoc-3.11.2-linux-x86_64.zip \
-    && unzip protoc-3.11.2-linux-x86_64.zip -d ~/protoc \
-    && cp -rf ~/protoc/bin/* /usr/local/bin/ && cp -rf ~/protoc/include/* /usr/local/include/ && rm -rf protoc* \
-    && cd /go && wget https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz \
+RUN cd /go && wget https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz \
     && tar zxvf docker-latest.tgz \
     && cp docker/docker /usr/local/bin/ \
     && rm -rf docker docker-latest.tgz
