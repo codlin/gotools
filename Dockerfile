@@ -1,14 +1,21 @@
-FROM golang:1.12.9
+FROM golang:1.13.5
 
-USER root
-ENV GOPATH /go
-ENV PATH ${GOPATH}/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/lib
+ENV GO111MODULE=off
 
 # Install packages
-RUN go get -u golang.org/x/lint/golint
-RUN go get -u github.com/golang/protobuf/protoc-gen-go
-RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.tar.gz \
+RUN apt-get update && \
+    && apt-get install -y --no-install-recommends tcl tk expect
+    && go get -u golang.org/x/lint/golint
+    && go get -u github.com/golang/protobuf/protoc-gen-go \
+    && go install github.com/golang/protobuf/protoc-gen-go \
+    && go get -u google.golang.org/grpc \
+    && go install google.golang.org/grpc \
+    && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
+    && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
+    && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
+    && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
+    && wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.tar.gz \
     && tar -C /usr/local -zxf protobuf-all-*.tar.gz \
     && cd /usr/local/protobuf-* \
     &&  ./configure && make && make install \
@@ -18,10 +25,3 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/p
     && tar zxvf docker-latest.tgz \
     && cp docker/docker /usr/local/bin/ \
     && rm -rf docker docker-latest.tgz
-
-# install expect
-RUN apt-get update
-RUN apt-get -y install tcl tk expect
-
-RUN go get -u google.golang.org/grpc && go install google.golang.org/grpc \
-    && go get -u github.com/micro/protoc-gen-micro && go install github.com/micro/protoc-gen-micro
