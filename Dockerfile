@@ -4,7 +4,7 @@ ENV LD_LIBRARY_PATH /usr/local/lib
 ENV GO111MODULE=off
 
 # Install packages
-RUN apt-get update && \
+RUN apt-get update \
     && apt-get install -y --no-install-recommends tcl tk expect\
     && go get -u golang.org/x/lint/golint \
     && go get -u github.com/golang/protobuf/protoc-gen-go \
