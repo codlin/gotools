@@ -1,4 +1,4 @@
-FROM golang:1.13.5
+FROM 1.13.5-alpine3.11
 
 ENV LD_LIBRARY_PATH /usr/local/lib
 ENV GO111MODULE=off
