@@ -5,8 +5,9 @@ ENV GO111MODULE=off
 
 # Install packages
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends tcl tk expect\
-    && git clone https://github.com/golang/lint.git $GOPATH/src/golang.org/x/lint　\
+    && apt-get install -y --no-install-recommends tcl tk expect
+    
+RUN git clone https://github.com/golang/lint.git $GOPATH/src/golang.org/x/lint　\
     && go get -u github.com/golang/protobuf/protoc-gen-go \
     && go install github.com/golang/protobuf/protoc-gen-go \
     && go get -u google.golang.org/grpc \
@@ -14,8 +15,9 @@ RUN apt-get update \
     && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
     && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
     && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
-    && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
-    && wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.tar.gz \
+    && go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.tar.gz \
     && tar -C /usr/local -zxf protobuf-all-*.tar.gz \
     && cd /usr/local/protobuf-* \
     &&  ./configure && make && make install \
