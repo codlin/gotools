@@ -6,7 +6,7 @@ ENV GOPROXY="https://goproxy.cn,direct"
 
 # Install packages
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends tcl tk expect
+    && apt-get install -y --no-install-recommends tcl tk expect unzip
     
 RUN go get -u golang.org/x/lint/golint && go install golang.org/x/lint/golint \
     && go get -u github.com/golang/protobuf/protoc-gen-go \
