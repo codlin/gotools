@@ -20,9 +20,7 @@ RUN apt-get update \
     
 RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protoc-3.11.2-linux-x86_64.zip \
     && unzip protoc-3.11.2-linux-x86_64.zip -d ~/protoc \
-    && cp -rf ~/protoc/bin/* /usr/local/bin/ && cp -rf ~/protoc/include/* /usr/local/include/ \
-    && ./configure && make && make install \
-    && rm -rf protoc* \
+    && cp -rf ~/protoc/bin/* /usr/local/bin/ && cp -rf ~/protoc/include/* /usr/local/include/ && rm -rf protoc* \
     && cd /go && wget https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz \
     && tar zxvf docker-latest.tgz \
     && cp docker/docker /usr/local/bin/ \
